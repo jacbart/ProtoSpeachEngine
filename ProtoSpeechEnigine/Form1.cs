@@ -28,7 +28,7 @@ namespace ProtoSpeechEnigine
         private void Form1_Load(object sender, EventArgs e)
         {
             Choices commands = new Choices();
-            commands.Add(new string[] { "hello", "hello world" });
+            commands.Add(new string[] { "Next", "Previous", "Prev" });
             GrammarBuilder gBuilder = new GrammarBuilder();
             gBuilder.Append(commands);
             Grammar grammar = new Grammar(gBuilder);
@@ -42,11 +42,13 @@ namespace ProtoSpeechEnigine
         {
             switch (e.Result.Text)
             {
-                case "hello":
-                    richTextBox1.Text += "\nhello";
+                case "Previous":
+                case "Prev":
+
+                    richTextBox1.Text += "\nprevious";
                     break;
-                case "hello world":
-                    richTextBox1.Text += "\nhello world";
+                case "Next":
+                    richTextBox1.Text += "\nNext";
                     break;
             }
         }
