@@ -28,53 +28,54 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnEnable = new System.Windows.Forms.Button();
+            this.btn1 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.btnDisable = new System.Windows.Forms.Button();
+            this.clear = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // btnEnable
+            // btn1
             // 
-            this.btnEnable.AccessibleName = "Enable Voice Control";
-            this.btnEnable.Location = new System.Drawing.Point(12, 134);
-            this.btnEnable.Name = "btnEnable";
-            this.btnEnable.Size = new System.Drawing.Size(132, 34);
-            this.btnEnable.TabIndex = 0;
-            this.btnEnable.Text = "Enable Voice Control";
-            this.btnEnable.UseVisualStyleBackColor = true;
-            this.btnEnable.Click += new System.EventHandler(this.button1_Click);
+            this.btn1.AccessibleName = "Enable Voice Control";
+            this.btn1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn1.Location = new System.Drawing.Point(12, 254);
+            this.btn1.Name = "btn1";
+            this.btn1.Size = new System.Drawing.Size(132, 34);
+            this.btn1.TabIndex = 0;
+            this.btn1.Text = "Enable Voice Control";
+            this.btn1.UseVisualStyleBackColor = true;
+            this.btn1.Click += new System.EventHandler(this.button1_Click);
             // 
             // richTextBox1
             // 
             this.richTextBox1.AccessibleName = "log";
+            this.richTextBox1.BackColor = System.Drawing.SystemColors.ControlDark;
             this.richTextBox1.Location = new System.Drawing.Point(12, 14);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(443, 96);
+            this.richTextBox1.Size = new System.Drawing.Size(315, 234);
             this.richTextBox1.TabIndex = 1;
-            this.richTextBox1.Text = "- log -";
+            this.richTextBox1.Text = "";
             // 
-            // btnDisable
+            // clear
             // 
-            this.btnDisable.AccessibleName = "Disable Voice Control";
-            this.btnDisable.Enabled = false;
-            this.btnDisable.Location = new System.Drawing.Point(168, 134);
-            this.btnDisable.Name = "btnDisable";
-            this.btnDisable.Size = new System.Drawing.Size(142, 34);
-            this.btnDisable.TabIndex = 2;
-            this.btnDisable.Text = "Disable Voice Control";
-            this.btnDisable.UseVisualStyleBackColor = true;
-            this.btnDisable.Click += new System.EventHandler(this.btnDisable_Click);
+            this.clear.AccessibleName = "Clear Log";
+            this.clear.Location = new System.Drawing.Point(235, 255);
+            this.clear.Name = "clear";
+            this.clear.Size = new System.Drawing.Size(90, 33);
+            this.clear.TabIndex = 2;
+            this.clear.Text = "Clear Log";
+            this.clear.UseVisualStyleBackColor = true;
+            this.clear.Click += new System.EventHandler(this.clear_Click);
             // 
             // Form1
             // 
             this.AccessibleName = "ProtoSpeechEngine";
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(467, 200);
-            this.Controls.Add(this.btnDisable);
+            this.ClientSize = new System.Drawing.Size(337, 303);
+            this.Controls.Add(this.clear);
             this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.btnEnable);
+            this.Controls.Add(this.btn1);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ProtoSpeechEngine";
@@ -85,9 +86,9 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnEnable;
+        private System.Windows.Forms.Button btn1;
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.Button btnDisable;
+        private System.Windows.Forms.Button clear;
     }
 }
 

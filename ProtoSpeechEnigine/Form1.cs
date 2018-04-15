@@ -19,11 +19,23 @@ namespace ProtoSpeechEnigine
             InitializeComponent();
         }
 
+        bool enableBtn = true;
         private void button1_Click(object sender, EventArgs e)
         {
-            recEngine.RecognizeAsync(RecognizeMode.Multiple);
-            btnDisable.Enabled = true;
-            btnEnable.Enabled = false;
+            if (enableBtn == true)
+            {
+                recEngine.RecognizeAsync(RecognizeMode.Multiple);
+                btn1.AccessibleName = "Disable Voice Control";
+                btn1.Text = "Disable Voice Control";
+                enableBtn = false;
+            }
+            else if (enableBtn == false)
+            {
+                recEngine.RecognizeAsyncStop();
+                btn1.AccessibleName = "Enable Voice Control";
+                btn1.Text = "Enable Voice Control";
+                enableBtn = true;
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -54,11 +66,9 @@ namespace ProtoSpeechEnigine
             }
         }
 
-        private void btnDisable_Click(object sender, EventArgs e)
+        private void clear_Click(object sender, EventArgs e)
         {
-            recEngine.RecognizeAsyncStop();
-            btnDisable.Enabled = false;
-            btnEnable.Enabled = true;
+            richTextBox1.Text = "";
         }
     }
 }
