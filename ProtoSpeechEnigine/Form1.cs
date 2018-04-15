@@ -23,6 +23,7 @@ namespace ProtoSpeechEnigine
         {
             recEngine.RecognizeAsync(RecognizeMode.Multiple);
             btnDisable.Enabled = true;
+            btnEnable.Enabled = false;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -57,6 +58,7 @@ namespace ProtoSpeechEnigine
         {
             recEngine.RecognizeAsyncStop();
             btnDisable.Enabled = false;
+            btnEnable.Enabled = true;
         }
     }
 }
