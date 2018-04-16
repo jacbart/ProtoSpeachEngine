@@ -35,14 +35,16 @@
             // 
             // btn1
             // 
-            this.btn1.AccessibleName = "Enable Voice Control";
+            this.btn1.AccessibleName = "Voice Control Disabled";
+            this.btn1.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btn1.BackColor = System.Drawing.SystemColors.Control;
             this.btn1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn1.Location = new System.Drawing.Point(12, 254);
             this.btn1.Name = "btn1";
             this.btn1.Size = new System.Drawing.Size(132, 34);
             this.btn1.TabIndex = 0;
-            this.btn1.Text = "Enable Voice Control";
-            this.btn1.UseVisualStyleBackColor = true;
+            this.btn1.Text = "Voice Control Disabled";
+            this.btn1.UseVisualStyleBackColor = false;
             this.btn1.Click += new System.EventHandler(this.button1_Click);
             // 
             // richTextBox1

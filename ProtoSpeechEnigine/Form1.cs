@@ -25,15 +25,15 @@ namespace ProtoSpeechEnigine
             if (enableBtn == true)
             {
                 recEngine.RecognizeAsync(RecognizeMode.Multiple);
-                btn1.AccessibleName = "Disable Voice Control";
-                btn1.Text = "Disable Voice Control";
+                btn1.AccessibleName = "Voice Control Enabled";
+                btn1.Text = "Voice Control Enabled";
                 enableBtn = false;
             }
             else if (enableBtn == false)
             {
                 recEngine.RecognizeAsyncStop();
-                btn1.AccessibleName = "Enable Voice Control";
-                btn1.Text = "Enable Voice Control";
+                btn1.AccessibleName = "Voice Control Disabled";
+                btn1.Text = "Voice Control Disabled";
                 enableBtn = true;
             }
         }
