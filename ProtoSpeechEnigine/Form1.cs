@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,6 +20,10 @@ namespace ProtoSpeechEnigine
             InitializeComponent();
         }
 
+        public void SendCommand(String command)
+        {
+            Process.Start("msr_util.exe", command);
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             recEngine.RecognizeAsync(RecognizeMode.Multiple);
@@ -29,7 +34,7 @@ namespace ProtoSpeechEnigine
         private void Form1_Load(object sender, EventArgs e)
         {
             Choices commands = new Choices();
-            commands.Add(new string[] { "Next", "Previous", "Prev" });
+            commands.Add(new string[] { "Next", "Previous", "Prev", "Root" });
             GrammarBuilder gBuilder = new GrammarBuilder();
             gBuilder.Append(commands);
             Grammar grammar = new Grammar(gBuilder);
@@ -45,11 +50,16 @@ namespace ProtoSpeechEnigine
             {
                 case "Previous":
                 case "Prev":
-
+                    this.SendCommand("review_previousWord");
                     richTextBox1.Text += "\nprevious";
                     break;
                 case "Next":
+                    this.SendCommand("review_nextWord");
                     richTextBox1.Text += "\nNext";
+                    break;
+                case "Root":
+                    this.SendCommand("navigatorObject_moveFocus|2");
+                    richTextBox1.Text += "\nRoot";
                     break;
             }
         }
