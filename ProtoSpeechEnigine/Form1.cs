@@ -14,7 +14,9 @@ namespace ProtoSpeechEnigine
 {
     public partial class Form1 : Form
     {
-        SpeechRecognitionEngine recEngine = new SpeechRecognitionEngine();
+        SpeechRecognizer recEngine = new SpeechRecognizer();
+        bool enableBtn = true;
+        Grammar movementGrammar;
         public Form1()
         {
             InitializeComponent();
@@ -24,19 +26,19 @@ namespace ProtoSpeechEnigine
         {
             Process.Start("msr_util.exe", command);
         }
-        bool enableBtn = true;
+
         private void button1_Click(object sender, EventArgs e)
         {
             if (enableBtn == true)
             {
-                recEngine.RecognizeAsync(RecognizeMode.Multiple);
+                recEngine.LoadGrammarAsync(movementGrammar);
                 btn1.AccessibleName = "Voice Control Enabled";
                 btn1.Text = "Voice Control Enabled";
                 enableBtn = false;
             }
             else if (enableBtn == false)
             {
-                recEngine.RecognizeAsyncStop();
+                recEngine.UnloadGrammar(movementGrammar);
                 btn1.AccessibleName = "Voice Control Disabled";
                 btn1.Text = "Voice Control Disabled";
                 enableBtn = true;
@@ -45,14 +47,11 @@ namespace ProtoSpeechEnigine
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Choices commands = new Choices();
-            commands.Add(new string[] { "Next", "Previous", "Prev", "Root" });
-            GrammarBuilder gBuilder = new GrammarBuilder();
-            gBuilder.Append(commands);
-            Grammar grammar = new Grammar(gBuilder);
-
-            recEngine.LoadGrammarAsync(grammar);
-            recEngine.SetInputToDefaultAudioDevice();
+            Choices movementCommands = new Choices();
+            movementCommands.Add(new string[] { "Next", "Previous", "Prev", "Root" });
+            GrammarBuilder movementGrammarBuilder = new GrammarBuilder();
+            movementGrammarBuilder.Append(movementCommands);
+            movementGrammar = new Grammar(movementGrammarBuilder);
             recEngine.SpeechRecognized += RecEngine_SpeechRecognized;
         }
 
