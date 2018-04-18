@@ -34,6 +34,7 @@ namespace ProtoSpeechEnigine
                 recEngine.LoadGrammarAsync(movementGrammar);
                 btn1.AccessibleName = "Voice Control Enabled";
                 btn1.Text = "Voice Control Enabled";
+                richTextBox1.Text += "Enabling Command Logging\n";
                 enableBtn = false;
             }
             else if (enableBtn == false)
@@ -41,6 +42,7 @@ namespace ProtoSpeechEnigine
                 recEngine.UnloadGrammar(movementGrammar);
                 btn1.AccessibleName = "Voice Control Disabled";
                 btn1.Text = "Voice Control Disabled";
+                richTextBox1.Text += "Disabling Command Logging\n";
                 enableBtn = true;
             }
         }
@@ -62,15 +64,15 @@ namespace ProtoSpeechEnigine
                 case "Previous":
                 case "Prev":
                     this.SendCommand("review_previousWord");
-                    richTextBox1.Text += "\nprevious";
+                    richTextBox1.Text += "Previous\n";
                     break;
                 case "Next":
                     this.SendCommand("review_nextWord");
-                    richTextBox1.Text += "\nNext";
+                    richTextBox1.Text += "Next\n";
                     break;
                 case "Root":
                     this.SendCommand("navigatorObject_moveFocus|2");
-                    richTextBox1.Text += "\nRoot";
+                    richTextBox1.Text += "Root\n";
                     break;
             }
         }
