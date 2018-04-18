@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProtoSpeechEnigine", "ProtoSpeechEnigine\ProtoSpeechEnigine.csproj", "{270A75ED-87E4-4D15-82EC-B65C69782133}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProtoSpeechEngine", "ProtoSpeechEngine\ProtoSpeechEngine.csproj", "{270A75ED-87E4-4D15-82EC-B65C69782133}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

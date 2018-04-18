@@ -9,14 +9,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Speech.Recognition;
+using NVAccess;
 
-namespace ProtoSpeechEnigine
+namespace protoSpeechEngine
 {
     public partial class Form1 : Form
     {
         SpeechRecognizer recEngine = new SpeechRecognizer();
         bool enableBtn = true;
         Grammar movementGrammar;
+        Grammar modeGrammar;
+        NVDA NVDAApi = new NVDA();
+        String[] modes = new String[] { "Edit", "Review"};
+
         public Form1()
         {
             InitializeComponent();
@@ -27,11 +32,17 @@ namespace ProtoSpeechEnigine
             Process.Start("msr_util.exe", command);
         }
 
+        public void speak(String text)
+        {
+            NVDA.Say(text, true);
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             if (enableBtn == true)
             {
                 recEngine.LoadGrammarAsync(movementGrammar);
+                recEngine.LoadGrammarAsync(modeGrammar);
                 btn1.AccessibleName = "Voice Control Enabled";
                 btn1.Text = "Voice Control Enabled";
                 enableBtn = false;
@@ -39,6 +50,7 @@ namespace ProtoSpeechEnigine
             else if (enableBtn == false)
             {
                 recEngine.UnloadGrammar(movementGrammar);
+                recEngine.UnloadGrammar(modeGrammar);
                 btn1.AccessibleName = "Voice Control Disabled";
                 btn1.Text = "Voice Control Disabled";
                 enableBtn = true;
@@ -52,6 +64,12 @@ namespace ProtoSpeechEnigine
             GrammarBuilder movementGrammarBuilder = new GrammarBuilder();
             movementGrammarBuilder.Append(movementCommands);
             movementGrammar = new Grammar(movementGrammarBuilder);
+            Choices modeCommands= new Choices();
+            modeCommands.Add(modes);
+            GrammarBuilder modeBuilder = new GrammarBuilder();
+            modeBuilder.Append(modeCommands);
+            modeBuilder.Append("Mode");
+            modeGrammar = new Grammar(modeBuilder);
             recEngine.SpeechRecognized += RecEngine_SpeechRecognized;
         }
 
