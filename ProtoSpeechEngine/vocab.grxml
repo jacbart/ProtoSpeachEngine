@@ -1,18 +1,131 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <grammar
-   version="1.0" mode="voice" root="root"
+   version="1.0" mode="voice" root="top"
    tag-format="semantics/1.0" xml:lang="en-US"
    xml:base="http://www.contoso.com/"
    xmlns="http://www.w3.org/2001/06/grammar"
    xmlns:sapi="http://schemas.microsoft.com/Speech/2002/06/SRGSExtensions">
-
-  <rule id="root">
-    
+  <rule id="top">
+    <item repeat="0-1">Please</item>
+    <one-of>
+      <item>
+        <ruleref uri="#nav"/>
+        <tag> out.nav = rules.nav; </tag>
+        <tag> out.rule = "nav"; </tag>
+      </item>
+      <item>
+        <ruleref uri="#granularity"/>
+        <tag> out.granularity = rules.granularity.granularity; </tag>
+        <tag> out.rule = "granularity"; </tag>
+      </item>
+    </one-of>
+    <item repeat="0-1">Please</item>
+  </rule>
+  <rule id="nav">
     <one-of>      
-      <item>Next</item>
-      <item>Previous</item>
-      <item>Root</item>
+      <item>Next <tag>out = "review_next$modeType"; </tag></item>
+      <item>Previous <tag> out = "review_previous$modeType"; </tag></item>
+      <item>
+        <ruleref uri="#repeatWords"/>
+        <tag> out = "review_current$modeType"; </tag>
+      </item>
+      <item weight="1">
+        speak current
+        <ruleref uri="#granularity" />
+        <tag> out = "review_current"+rules.latest().granularity; </tag>
+      </item>
+      <item weight=".5">
+        current
+        <ruleref uri="#granularity" />
+        phonetically
+        <tag> var rule = rules.latest(); out = "review_current"+rule.granularity+"|"+rule.phoneticNum; </tag>
+      </item>
+      <item>
+        spell current
+        <ruleref uri="#granularity" />
+        <tag> var rule = rules.latest(); out = "review_current"+rule.granularity+"|"+rule.spellNum; </tag>
+      </item>
+      <item>Root<tag> out = "navigatorObject_moveFocus|2"</tag>
+      </item>
+      <item>
+        <ruleref uri="#selectWords"/>
+        Mode
+        <ruleref uri="#onWords"/>
+        <tag> out = "review_markStartForCopy"; </tag>
+      </item>
+      <item> 
+        <ruleref uri="#selectWords"/>
+        Mode
+        <ruleref uri="#offWords"/>
+        <tag> out = "review_copy"; </tag>
+      </item>
+    </one-of>
+  </rule>
+  
+  <rule id="granularity">
+    <one-of>
+      <item>
+        Character
+        <tag> out.granularity = "Character"; </tag>
+        <tag> out.spellNum = 1; </tag>
+        <tag> out.phoneticNum = 2; </tag>
+      </item>
+      <item>
+        word
+        <tag> out.granularity = "Word"; </tag>
+        <tag> out.spellNum = 2; </tag>
+        <tag> out.phoneticNum = 3; </tag>
+      </item>
+      <item>
+        line
+        <tag> out.granularity = "Line"; </tag>
+        <tag> out.spellNum = 2; </tag>
+        <tag> out.phoneticNum = 3; </tag>
+      </item>
+    </one-of>
+  </rule>
+  
+  <rule id="selectWords">
+    <one-of>
+      <item>Select</item>
+      <item>Selection</item>
     </one-of>
   </rule>
 
+  <rule id="onWords">
+    <one-of>
+      <item>On</item>
+      <item>Active</item>
+      <item>enabled</item>
+    </one-of>
+  </rule>
+  <rule id="offWords">
+    <one-of>
+      <item>Off</item>
+      <item>inactive</item>
+      <item>disabled</item>
+    </one-of>
+  </rule>
+  
+  <rule id="repeatWords">
+    <one-of>
+      <item>
+        <item repeat="0-1">
+          <one-of>
+            <item>say </item>
+            <item>speak</item>
+            <item>repeat</item>
+          </one-of>
+          <one-of>
+            <item>it</item>
+            <item>that</item>
+          </one-of>
+        </item>
+        <item>Again</item>
+      </item>
+      <item>
+        repeat
+      </item>
+    </one-of>
+  </rule>
 </grammar>

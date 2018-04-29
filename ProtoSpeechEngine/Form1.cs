@@ -20,7 +20,7 @@ namespace protoSpeechEngine
         SpeechRecognizer recEngine = new SpeechRecognizer();
         bool enableBtn = true;
         Grammar movementGrammar;
-        //Grammar modeGrammar;
+        String granularity = "Word";
         NVDA NVDAApi = new NVDA();
         String[] modes = new String[] { "Edit", "Review"};
 
@@ -73,7 +73,7 @@ namespace protoSpeechEngine
             }
             else
             {
-                richTextBox1.Text += "Unable to load grammar file\n";
+                richTextBox1.Text += "Unable to load grammar file "+ fi + "\n";
             }
 
             GrammarBuilder movementGrammarBuilder = new GrammarBuilder();
@@ -96,20 +96,17 @@ namespace protoSpeechEngine
 
         private void RecEngine_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
-            richTextBox1.Text += e.Result.Text + "\n";
-            switch (e.Result.Text)
+            this.richTextBox1.Text += e.Result.Semantics["rule"].Value + "\n";
+            switch (e.Result.Semantics["rule"].Value)
             {
-                case "Previous":
-                    this.SendCommand("review_previousWord");
+                case "granularity":
+                    this.granularity = e.Result.Semantics["granularity"].Value.ToString();
+                    speak(granularity+" Mode active");
                     break;
-                case "Next":
-                    this.SendCommand("review_nextWord");
-                    break;
-                case "Root":
-                    this.SendCommand("navigatorObject_moveFocus|2");
+                case "nav":
+                    this.SendCommand(e.Result.Semantics["nav"].Value.ToString().Replace("$modeType", granularity));
                     break;
             }
-            //String v = e.Result.Semantics.Value.ToString();
         }
 
         private void clear_Click(object sender, EventArgs e)
