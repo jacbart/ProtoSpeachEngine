@@ -7,6 +7,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
+using System.IO;
 using System.Windows.Forms;
 using System.Speech.Recognition;
 using NVAccess;
@@ -16,6 +18,7 @@ namespace protoSpeechEngine
     public partial class Form1 : Form
     {
         SpeechRecognizer recEngine = new SpeechRecognizer();
+        private const string grammarPath = @"C:\Users\user\Documents\GitHub\ProtoSpeechEngine\ProtoSpeechEngine\bin\Debug\";
         bool enableBtn = true;
         Grammar movementGrammar;
         Grammar modeGrammar;
@@ -61,43 +64,56 @@ namespace protoSpeechEngine
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Choices movementCommands = new Choices();
-            movementCommands.Add(new string[] { "Next", "Previous", "Prev", "Root" });
+            //Choices movementCommands = new Choices();
+            //movementCommands.Add(new string[] { "Next", "Previous", "Prev", "Root" });
+
             GrammarBuilder movementGrammarBuilder = new GrammarBuilder();
-            movementGrammarBuilder.Append(movementCommands);
+            //movementGrammarBuilder.Append(movementCommands);
+            movementGrammarBuilder.AppendRuleReference(grammarPath + "vocab.grxml");
             movementGrammar = new Grammar(movementGrammarBuilder);
+
             Choices modeCommands= new Choices();
             modeCommands.Add(modes);
+
             GrammarBuilder modeBuilder = new GrammarBuilder();
             modeBuilder.Append(modeCommands);
             modeBuilder.Append("Mode");
             modeGrammar = new Grammar(modeBuilder);
-            recEngine.SpeechRecognized += RecEngine_SpeechRecognized;
+
+            //recEngine.SpeechRecognized += RecEngine_SpeechRecognized;
+            recEngine.SpeechRecognized += new EventHandler<SpeechRecognizedEventArgs>(RecEngine_SpeechRecognized);
         }
 
         private void RecEngine_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
-            switch (e.Result.Text)
-            {
-                case "Previous":
-                case "Prev":
-                    this.SendCommand("review_previousWord");
-                    richTextBox1.Text += "Previous\n";
-                    break;
-                case "Next":
-                    this.SendCommand("review_nextWord");
-                    richTextBox1.Text += "Next\n";
-                    break;
-                case "Root":
-                    this.SendCommand("navigatorObject_moveFocus|2");
-                    richTextBox1.Text += "Root\n";
-                    break;
-            }
+            //switch (e.Result.Text)
+            //{
+            //    case "Previous":
+            //    case "Prev":
+            //        this.SendCommand("review_previousWord");
+            //        break;
+            //    case "Next":
+            //        this.SendCommand("review_nextWord");
+            //        break;
+            //    case "Root":
+            //        this.SendCommand("navigatorObject_moveFocus|2");
+            //        break;
+            //}
+            //String v = e.Result.Semantics.Value.ToString();
+            //richTextBox1.Text += v + "\n";
+            //richTextBox1.Text += e.Result.Text + "\n";
+            //this.SendCommand(e.Result.Semantics.Value.ToString());
+            richTextBox1.Text += e.Result.Semantics.Value;
         }
 
         private void clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Text = "";
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
