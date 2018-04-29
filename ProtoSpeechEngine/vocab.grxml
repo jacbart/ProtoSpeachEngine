@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<grammar
+   version="1.0" mode="voice" root="root"
+   tag-format="semantics/1.0" xml:lang="en-US"
+   xml:base="http://www.contoso.com/"
+   xmlns="http://www.w3.org/2001/06/grammar"
+   xmlns:sapi="http://schemas.microsoft.com/Speech/2002/06/SRGSExtensions">
+
+  <rule id="root">
+    
+    <one-of>      
+      <item>Next</item>
+      <item>Previous</item>
+      <item>Root</item>
+    </one-of>
+  </rule>
+
+</grammar>
