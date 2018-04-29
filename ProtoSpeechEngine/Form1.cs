@@ -44,7 +44,6 @@ namespace protoSpeechEngine
             if (enableBtn == true)
             {
                 recEngine.LoadGrammarAsync(movementGrammar);
-                //recEngine.LoadGrammarAsync(modeGrammar);
                 btn1.AccessibleName = "Voice Control Enabled";
                 btn1.Text = "Voice Control Enabled";
                 richTextBox1.Text += "Enabling Command Logging\n";
@@ -53,7 +52,6 @@ namespace protoSpeechEngine
             else if (enableBtn == false)
             {
                 recEngine.UnloadGrammar(movementGrammar);
-                //recEngine.UnloadGrammar(modeGrammar);
                 btn1.AccessibleName = "Voice Control Disabled";
                 btn1.Text = "Voice Control Disabled";
                 richTextBox1.Text += "Disabling Command Logging\n";
@@ -63,34 +61,23 @@ namespace protoSpeechEngine
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //Choices movementCommands = new Choices();
-            //movementCommands.Add(new string[] { "Next", "Previous", "Prev", "Root" });
+            GrammarBuilder movementGrammarBuilder = new GrammarBuilder();
 
+            // Defining the Grammar XML file
             string fi = Directory.GetCurrentDirectory() + @"\vocab.grxml";
-            if(File.Exists(fi))
+            // Checks if the vocab file exist and loads it in if it does, otherwise I displays a error message
+            if (File.Exists(fi))
             {
-                richTextBox1.Text += "Grammar File Loaded\n";
+                movementGrammarBuilder.AppendRuleReference(fi);
+                richTextBox1.Text += "Grammar File Loaded (" + fi + ")\n";
             }
             else
             {
                 richTextBox1.Text += "Unable to load grammar file "+ fi + "\n";
             }
 
-            GrammarBuilder movementGrammarBuilder = new GrammarBuilder();
-            //movementGrammarBuilder.Append(movementCommands);
-            movementGrammarBuilder.AppendRuleReference(Directory.GetCurrentDirectory() + @"\vocab.grxml");
             movementGrammar = new Grammar(movementGrammarBuilder);
 
-
-            //Choices modeCommands= new Choices();
-            //modeCommands.Add(modes);
-
-            //GrammarBuilder modeBuilder = new GrammarBuilder();
-            //modeBuilder.Append(modeCommands);
-            //modeBuilder.Append("Mode");
-            //modeGrammar = new Grammar(modeBuilder);
-
-            //recEngine.SpeechRecognized += RecEngine_SpeechRecognized;
             recEngine.SpeechRecognized += new EventHandler<SpeechRecognizedEventArgs>(RecEngine_SpeechRecognized);
         }
 

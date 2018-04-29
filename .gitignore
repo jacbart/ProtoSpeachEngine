@@ -261,4 +261,4 @@ __pycache__/
 *.pyc
 */bin/
 */obj/
-!*/bin/debug/vocab.grxml
+*!/bin/debug/vocab.grxml
