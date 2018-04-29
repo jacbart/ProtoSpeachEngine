@@ -1,18 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <grammar
-   version="1.0" mode="voice" root="root"
-   tag-format="semantics/1.0" xml:lang="en-US"
+   version="1.0" mode="voice" root="rootRule"
+   tag-format="semantics-ms/1.0" xml:lang="en-US"
    xml:base="http://www.contoso.com/"
    xmlns="http://www.w3.org/2001/06/grammar"
    xmlns:sapi="http://schemas.microsoft.com/Speech/2002/06/SRGSExtensions">
 
-  <rule id="root">
-    
-    <one-of>      
-      <item>Next</item>
-      <item>Previous</item>
-      <item>Root</item>
+  <rule id="rootRule">
+    <one-of>
+      <item><ruleref uri="#basic"/></item>
+      <item><ruleref uri="#mode" /></item>
     </one-of>
+  </rule>
+
+  <rule id="basic" scope="public">
+    <one-of>
+      <item>next</item>
+      <item>previous</item>
+      <item>root</item>
+    </one-of>
+  </rule>
+    
+  <rule id="mode" scope="public">
+    <one-of>
+      <item>Edit</item>
+      <item>Review</item>
+    </one-of>
+    <item>Mode</item>
   </rule>
 
 </grammar>
