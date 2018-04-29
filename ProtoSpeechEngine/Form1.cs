@@ -66,7 +66,15 @@ namespace protoSpeechEngine
             //Choices movementCommands = new Choices();
             //movementCommands.Add(new string[] { "Next", "Previous", "Prev", "Root" });
 
-            //string fi = Directory.GetCurrentDirectory() + @"\vocab.grxml";
+            string fi = Directory.GetCurrentDirectory() + @"\vocab.grxml";
+            if(File.Exists(fi))
+            {
+                richTextBox1.Text += "Grammar File Loaded\n";
+            }
+            else
+            {
+                richTextBox1.Text += "Unable to load grammar file\n";
+            }
 
             GrammarBuilder movementGrammarBuilder = new GrammarBuilder();
             //movementGrammarBuilder.Append(movementCommands);
@@ -88,6 +96,7 @@ namespace protoSpeechEngine
 
         private void RecEngine_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
+            richTextBox1.Text += e.Result.Text + "\n";
             switch (e.Result.Text)
             {
                 case "Previous":
@@ -101,7 +110,6 @@ namespace protoSpeechEngine
                     break;
             }
             //String v = e.Result.Semantics.Value.ToString();
-            richTextBox1.Text += e.Result.Text + "\n";
         }
 
         private void clear_Click(object sender, EventArgs e)
