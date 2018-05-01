@@ -36,12 +36,14 @@
             // btn1
             // 
             this.btn1.AccessibleName = "Voice Control Disabled";
-            this.btn1.AccessibleRole = System.Windows.Forms.AccessibleRole.RadioButton;
+            this.btn1.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btn1.BackColor = System.Drawing.SystemColors.Control;
             this.btn1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn1.Location = new System.Drawing.Point(12, 254);
             this.btn1.Name = "btn1";
-            this.btn1.Size = new System.Drawing.Size(132, 34);
+            this.btn1.Size = new System.Drawing.Size(199, 34);
             this.btn1.TabIndex = 0;
             this.btn1.Text = "Voice Control Disabled";
             this.btn1.UseVisualStyleBackColor = false;
@@ -51,10 +53,10 @@
             // 
             this.richTextBox1.AccessibleName = "log";
             this.richTextBox1.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.richTextBox1.Location = new System.Drawing.Point(12, 11);
+            this.richTextBox1.Location = new System.Drawing.Point(12, 12);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(401, 234);
+            this.richTextBox1.Size = new System.Drawing.Size(401, 233);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
@@ -63,12 +65,15 @@
             // 
             this.clear.AccessibleName = "Clear Log";
             this.clear.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.clear.Location = new System.Drawing.Point(150, 255);
+            this.clear.BackColor = System.Drawing.SystemColors.Control;
+            this.clear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.clear.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.clear.Location = new System.Drawing.Point(320, 254);
             this.clear.Name = "clear";
             this.clear.Size = new System.Drawing.Size(90, 33);
             this.clear.TabIndex = 2;
             this.clear.Text = "Clear Log";
-            this.clear.UseVisualStyleBackColor = true;
+            this.clear.UseVisualStyleBackColor = false;
             this.clear.Click += new System.EventHandler(this.clear_Click);
             // 
             // Form1
@@ -76,13 +81,17 @@
             this.AccessibleName = "ProtoSpeechEngine";
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(422, 303);
             this.Controls.Add(this.clear);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.btn1);
+            this.Cursor = System.Windows.Forms.Cursors.Default;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ProtoSpeechEngine";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 
